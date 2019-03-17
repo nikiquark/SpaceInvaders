@@ -21,9 +21,15 @@
     <ClCompile Include="SpaceInvaders.c">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
+    <ClCompile Include="physics.c">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="objects.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="physics.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
   </ItemGroup>

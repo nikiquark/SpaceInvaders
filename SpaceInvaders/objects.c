@@ -82,7 +82,6 @@ void add_bullet(list_of_bullet list, int id, bullet bullet) {
 }
 
 void remove_enemy(list_of_enemy list, int id) {
-	list->tail->id = id;
 	comp_of_enemies* current_enemy = list->first->next;
 	while (current_enemy->id != id) {
 		current_enemy = current_enemy->next;
@@ -95,7 +94,6 @@ void remove_enemy(list_of_enemy list, int id) {
 }
 
 void remove_bullet(list_of_bullet list, int id) {
-	list->tail->id = id;
 	comp_of_bullets* current_bullet = list->first->next;
 	while (current_bullet->id != id) {
 		current_bullet = current_bullet->next;
@@ -115,7 +113,7 @@ ship get_enemy(list_of_enemy list, int id) {
 	return current_enemy->enemy;
 }
 
-bullet get_bullet(list_of_enemy list, int id) {
+bullet get_bullet(list_of_bullet list, int id) {
 	comp_of_bullets* current_bullet = list->first->next;
 	while (current_bullet->id != id) {
 		current_bullet = current_bullet->next;
@@ -131,12 +129,52 @@ int get_next_bullet_id(list_of_bullet list, int id) {
 	return current_bullet->next->id;
 }
 
-int get_next_bullet_id(list_of_bullet list, int id) {
+int get_next_enemy_id(list_of_enemy list, int id) {
+	comp_of_enemies* current_enemy = list->first->next;
+	while (current_enemy->id != id) {
+		current_enemy = current_enemy->next;
+	}
+	return current_enemy->next->id;
+}
+
+int get_prev_bullet_id(list_of_bullet list, int id) {
 	comp_of_bullets* current_bullet = list->first->next;
 	while (current_bullet->id != id) {
 		current_bullet = current_bullet->next;
 	}
-	return current_bullet->next->id;
+	return current_bullet->prev->id;
+}
+
+int get_prev_enemy_id(list_of_enemy list, int id) {
+	comp_of_enemies* current_enemy = list->first->next;
+	while (current_enemy->id != id) {
+		current_enemy = current_enemy->next;
+	}
+	return current_enemy->prev->id;
+}
+
+void change_enemy(list_of_enemy list, int id, ship enemy) {
+	comp_of_enemies* current_enemy = list->first->next;
+	while (current_enemy->id != id) {
+		current_enemy = current_enemy->next;
+	}
+	current_enemy->enemy = enemy;
+}
+
+void change_bullet(list_of_bullet list, int id, bullet bullet) {
+	comp_of_bullets* current_bullet = list->first->next;
+	while (current_bullet->id != id) {
+		current_bullet = current_bullet->next;
+	}
+	current_bullet->bullet = bullet;
+}
+
+int last_bullet_id(list_of_bullet list) {
+	return list->tail->prev->id;
+}
+
+int last_enemy_id(list_of_enemy list) {
+	return list->tail->prev->id;
 }
 
 //void delete_list_of_bullet(list_of_bullet list) {
