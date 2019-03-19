@@ -24,12 +24,18 @@
     <ClCompile Include="physics.c">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
+    <ClCompile Include="console.c">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="objects.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
     <ClInclude Include="physics.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="console.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
   </ItemGroup>

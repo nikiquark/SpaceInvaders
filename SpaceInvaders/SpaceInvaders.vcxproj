@@ -151,11 +151,13 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="console.c" />
     <ClCompile Include="objects.c" />
     <ClCompile Include="physics.c" />
     <ClCompile Include="SpaceInvaders.c" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="console.h" />
     <ClInclude Include="objects.h" />
     <ClInclude Include="physics.h" />
   </ItemGroup>

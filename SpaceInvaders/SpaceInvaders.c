@@ -1,5 +1,6 @@
 ﻿#include "objects.h"
 #include "physics.h"
+#include "console.h"
 #include <malloc.h>
 #include <stdio.h>
 
@@ -9,7 +10,7 @@ extern int MAX_ID;
 
 int main()
 {
-	srand(time(NULL));
+	/*srand(time(NULL));
 	list_of_enemy a = (list_of_enemy*)malloc(sizeof(list_of_enemy));
 	list_of_bullet b = (list_of_bullet*)malloc(sizeof(list_of_bullet));
 	init_list_of_enemy(a);
@@ -23,6 +24,13 @@ int main()
 	while (1 == 1) {
 		move_bullets(b, a, (ship) { 10, 10, 0, 0, 0 });
 	}
+*/
+	int max_x, max_y;
+	con_init();
+	con_hideCursor();
+	system("mode con cols=150 lines=40");
+
+	con_getMaxXY(&max_x, &max_y);
 
 	return 0;		 
 }
