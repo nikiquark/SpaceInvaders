@@ -1,36 +1,28 @@
 ﻿#include "objects.h"
 #include "physics.h"
-#include "console.h"
 #include <malloc.h>
 #include <stdio.h>
 
-extern int HEIGTH;
-extern int WIDTH;
-extern int MAX_ID;
-
 int main()
 {
-	/*srand(time(NULL));
-	list_of_enemy a = (list_of_enemy*)malloc(sizeof(list_of_enemy));
-	list_of_bullet b = (list_of_bullet*)malloc(sizeof(list_of_bullet));
-	init_list_of_enemy(a);
-	init_list_of_bullet(b);
-	add_enemy(a, 0, (ship) { 100, 0, 0, 0, 0 });
-	add_enemy(a, 1, (ship) { 2, 0, 0, 0, 0 });
-	add_enemy(a, 2, (ship) { 100, 20, 0, 0, 0 });
-	move_enemies(a, 1, 1);
-	move_enemies(a, 1, 1);
-	fire(b, a);
+	srand(time(NULL));
+	list enemies = (list)malloc(sizeof(list));
+	list bullets = (list)malloc(sizeof(list));
+	init_list(enemies);
+	init_list(bullets);
+	add_enemy(enemies, 100, 1, 1, 1, 1);
+	add_enemy(enemies, 100, 7, 1, 1, 1);
+	add_enemy(enemies, 100, 14, 1, 1, 1);
+	move_enemies(enemies, 1, 1);
+	move_enemies(enemies, 1, 1);
+	move_enemies(enemies, 1, 1);
+	fire(bullets, enemies);
 	while (1 == 1) {
-		move_bullets(b, a, (ship) { 10, 10, 0, 0, 0 });
+		move_bullets(bullets, enemies, (ship) { 1, 1, 1, 1, 1 });
+		bullet* bullet1 = (bullet*)get_comp(bullets, 0);
+		bullet* bullet2 = (bullet*)get_comp(bullets, 1);
+		bullet* bullet3 = (bullet*)get_comp(bullets, 2);
+		printf("%d %d\n%d %d\n%d %d\n\n", bullet1->x, bullet1->y, bullet2->x, bullet2->y, bullet3->x, bullet3->y);
 	}
-*/
-	int max_x, max_y;
-	con_init();
-	con_hideCursor();
-	system("mode con cols=150 lines=40");
-
-	con_getMaxXY(&max_x, &max_y);
-
-	return 0;		 
+	return 0;
 }
