@@ -14,7 +14,7 @@ short color_attrs[CON_MAX_COLORS]; // - like ncurses color pairs
 
 void con_init()
 {
-	setlocale(LC_ALL, ".OCP");
+	setlocale(LC_ALL, "");
 	con_showCursor();
 }
 

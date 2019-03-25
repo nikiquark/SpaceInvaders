@@ -66,7 +66,9 @@ void fire(list bullets, list enemies) {
 	int current_enemy_id = get_next_id(enemies, -1);
 	while (current_enemy_id != -1) {
 		ship* current_enemy = (ship*)get_comp(enemies, current_enemy_id);
-		add_enemy_bullet(bullets, current_enemy);
+		//add_enemy_bullet(bullets, current_enemy);
+		add_bullet(bullets, current_enemy->x-1, current_enemy->y, -1, rand() % 3 - 1, 1);
+		add_bullet(bullets, current_enemy->x-1, current_enemy->y + current_enemy->size_y-1, -1, rand() % 3 - 1, 1);
 		current_enemy_id = get_next_id(enemies, current_enemy_id);
 	}
 }

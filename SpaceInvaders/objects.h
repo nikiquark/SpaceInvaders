@@ -28,4 +28,3 @@ void add_bullet(list list, int x, int y, int speed_x, int speed_y, int is_enemy)
 void add_enemy_bullet(list list, ship* enemy);
 
 void add_enemy(list list, int x, int y, int size_x, int size_y, int type);
-

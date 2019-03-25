@@ -27,6 +27,9 @@
     <ClCompile Include="console.c">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
+    <ClCompile Include="graphics.c">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="objects.h">
@@ -36,6 +39,9 @@
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
     <ClInclude Include="console.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="graphics.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
   </ItemGroup>
