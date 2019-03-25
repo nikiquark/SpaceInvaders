@@ -4,15 +4,15 @@
 
 char ships[2][4][4] = {
 	{
-	"asd",
-	"asd",
-	"asd",
-	"asd"
+	"==+",
+	"## ",
+	"## ",
+	"==+"
 	},{
-	"•√π",
-	"¶∆^",
-	"°✓",
-	"™®©"
+	"}=\\",
+	" []",
+	" []",
+	"}=/"
 	}
 };
 //!@#$%^&*()-_=+\"№%:?[]{}\|/;:',<.>/~☺¶§
@@ -33,7 +33,11 @@ void render_image(char image[30][150],list enemies, list bullets, ship SHIP) {
 		}
 		current_enemy_id = get_next_id(enemies, current_enemy_id);
 	}
-
+	for (int i = 0; i < SHIP.size_x; i++) {
+		for (int j = 0; j < SHIP.size_y; j++) {
+			image[j + SHIP.y][i + SHIP.x] = ships[SHIP.type][j][i];
+		}
+	}
 }
 
 void erase(char image[30][150]) {
