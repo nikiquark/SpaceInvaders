@@ -1,7 +1,7 @@
 #include "objects.h"
 #include "physics.h"
 #include <Windows.h>
-
+#include <WinUser.h>
 int WIDTH = 150;
 int HEIGHT = 30;
 
@@ -70,5 +70,33 @@ void fire(list bullets, list enemies) {
 		add_bullet(bullets, current_enemy->x-1, current_enemy->y, -1, rand() % 3 - 1, 1);
 		add_bullet(bullets, current_enemy->x-1, current_enemy->y + current_enemy->size_y-1, -1, rand() % 3 - 1, 1);
 		current_enemy_id = get_next_id(enemies, current_enemy_id);
+	}
+}
+
+int process_key (ship* SHIP){
+	if (GetKeyState(VK_LEFT) & 0x8000) {
+		if(SHIP->x > 0)
+			SHIP->x--;
+	}
+	if (GetKeyState(VK_RIGHT) & 0x8000) {
+		if (SHIP->x + SHIP->size_x < 150)
+			SHIP->x++;
+	}
+	if (GetKeyState(VK_UP) & 0x8000) {
+		if (SHIP->y > 0)
+			SHIP->y--;
+	}
+	if (GetKeyState(VK_DOWN) & 0x8000) {
+		if (SHIP->y + SHIP->size_y < 30)
+			SHIP->y++;
+	}
+	if (GetKeyState(0x5A) & 0x8000) { // Z
+
+	}
+	if (GetKeyState(0x58) & 0x8000) { // X
+
+	}
+	if (GetKeyState(0x43) & 0x8000) { // C
+
 	}
 }

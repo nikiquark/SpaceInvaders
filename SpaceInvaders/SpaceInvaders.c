@@ -6,7 +6,7 @@
 #include <Windows.h>
 #include <time.h>
 #include <sys/timeb.h>
-#define RELOAD_TIME 1500
+#define RELOAD_TIME 2500
 #define UPDATE_TIME 600
 
 char current_image[30][150], next_image[30][150];
@@ -18,6 +18,7 @@ unsigned long long ft(struct timeb *a) {
 int main()
 {
 	int dx = 0, dy = 2, q = 1, w = 1;
+	int quit = 0;
 	struct timeb t;
 	ftime(&t);
 	struct timeb last_update = t, last_fire = t, last_bot_fire = t;
@@ -38,7 +39,7 @@ int main()
 	erase(next_image);
 	render_image(next_image, enemies, bullets, SHIP);
 	Sleep(1000);
-	while (1 == 1) {
+	while (!quit) {
 		ftime(&t);
 		move_bullets(bullets, enemies, SHIP);
 		if (ft(&t) - ft(&last_bot_fire) > RELOAD_TIME) {
@@ -51,7 +52,11 @@ int main()
 			if (dx < 0 || dx > 5) q *= -1;
 			if (dy < 0 || dy > 5) w *= -1;
 		}
-
+		if (con_keyPressed()) {
+			if (process_key(&SHIP)) {
+				quit = 1;
+			}
+		}
 		out(current_image, next_image);
 		copy(next_image, current_image);
 		erase(next_image);
