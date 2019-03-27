@@ -6,7 +6,7 @@
 #include <Windows.h>
 #include <time.h>
 #include <sys/timeb.h>
-#define RELOAD_TIME 2500
+#define RELOAD_TIME 3000
 #define UPDATE_TIME 0
 
 char current_image[30][150], next_image[30][150];
@@ -26,6 +26,7 @@ int main()
 	con_init();
 	con_hideCursor();
 	init_colors();
+
 	srand(time(NULL));
 	list enemies = (list)malloc(sizeof(list));
 	list bullets = (list)malloc(sizeof(list));
@@ -33,13 +34,14 @@ int main()
 	init_list(enemies);
 	init_list(bullets);
 	add_enemy(enemies, 100, 4, 3, 4, 1);
-	/*add_enemy(enemies, 100, 13, 3, 4, 1);
-	add_enemy(enemies, 100, 22, 3, 4, 1);*/
+	add_enemy(enemies, 95, 13, 3, 4, 1);
+	add_enemy(enemies, 100, 21, 3, 4, 1);
 	fire(bullets, enemies);
 	erase(current_image);
 	erase(next_image);
 	render_image(next_image, enemies, bullets, SHIP);
 	Sleep(1000);
+	init();
 	while (!quit) {
 		ftime(&t);
 		move_bullets(bullets, enemies, SHIP);
@@ -54,7 +56,7 @@ int main()
 			if (dy < 0 || dy > 5) w *= -1;
 		}
 		if (con_keyPressed()) {
-			if (process_key(&SHIP)) {
+			if (process_key(&SHIP, bullets)) {
 				quit = 1;
 			}
 		}

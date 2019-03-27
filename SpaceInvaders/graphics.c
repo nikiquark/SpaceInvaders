@@ -7,12 +7,12 @@
 #define COLOR_BORDER 1
 #define COLOR_FIELD  2
 #define COLOR_BULLET  3
-
+#define COLOR_SHIP 4
 char ships[2][4][4] = {
 	{
 	"==+",
-	"## ",
-	"## ",
+	"OO ",
+	"OO ",
 	"==+"
 	},{
 	"}=\\",
@@ -25,8 +25,9 @@ char ships[2][4][4] = {
 
 void init_colors() {
 	con_initPair(COLOR_BORDER, CON_COLOR_BLACK, CON_COLOR_BLUE);
-	con_initPair(COLOR_FIELD, CON_COLOR_GREEN, CON_COLOR_GREEN);
-	con_initPair(COLOR_BULLET, CON_COLOR_RED, CON_COLOR_GREEN);
+	con_initPair(COLOR_FIELD, CON_COLOR_BLACK, CON_COLOR_BLACK);
+	con_initPair(COLOR_BULLET, CON_COLOR_BLUE, CON_COLOR_BLACK);
+	con_initPair(COLOR_SHIP, CON_COLOR_RED, CON_COLOR_BLACK);
 }
 
 void con_charAt(int ch, int color, int x, int y) {
@@ -87,26 +88,48 @@ void out(char current_image[30][150], char next_image[30][150]) {
 	for (int i = 0; i < 30; i++) {
 		for (int j = 0; j < 150; j++) {
 			if (current_image[i][j] != next_image[i][j]) {
-				
+				//con_gotoXY(j + FIELD_Y, i + FIELD_X);
+				//con_outTxt("%c", next_image[i][j]);
 				switch (next_image[i][j])
 				{
-				case CHAR_BORDER:
+				case '#':
 					color = COLOR_BORDER;
 					break;
-				case CHAR_FIELD:
+				case ' ':
 					color = COLOR_FIELD;
 					break;
-				case CHAR_BULLET:
+				case '*':
 					color = COLOR_BULLET;
 					break;
 				default:
-					color = 2;
+					color = COLOR_SHIP;
 					break;
 				}
-				con_charAt(next_image[i][j], 1, j + FIELD_Y, i + FIELD_X);
+				con_charAt(next_image[i][j], color, j + FIELD_Y, i + FIELD_X);
 
 			}
 		}
 	}
 }
 
+void init() {
+	con_clearScr();
+	con_gotoXY(20, 2);
+	con_outTxt("Use arrows to move, use C to exit.");
+
+	for (int i = 0; i < 120; ++i) {
+		for (int j = 0; j < 30; ++j) {
+			int ch;
+			int color;
+			if (i == 0 || i == 120 - 1 || j == 0 || j == 30 - 1) {
+				ch = CHAR_BORDER;
+				color = COLOR_BORDER;
+			}
+			else {
+				ch = CHAR_FIELD;
+				color = COLOR_FIELD;
+			}
+			con_charAt(ch, color, FIELD_Y + i, FIELD_X + j);
+		}
+	}
+}

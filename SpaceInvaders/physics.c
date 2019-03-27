@@ -27,7 +27,7 @@ void move_bullets(list bullets, list enemies, ship SHIP) {
 			list_pop(bullets, id_for_pop);
 		}
 		else {
-			if (current_bullet->y < 1 || current_bullet->y > HEIGHT-2) {
+			if (current_bullet->y < 1 || current_bullet->y > HEIGHT - 2) {
 				current_bullet->speed_y *= -1;
 				current_bullet->y += 2 * current_bullet->speed_y;
 			}
@@ -48,8 +48,9 @@ void move_bullets(list bullets, list enemies, ship SHIP) {
 						current_bullet->y > current_enemy->y && current_bullet->y < current_enemy->y + current_enemy->size_y) {
 						int enemy_id_for_pop = current_enemy_id;
 						int bullet_id_for_pop = current_bullet_id;
-						current_enemy_id = get_prev_id(bullets, current_enemy_id);
-						current_bullet_id = get_prev_id(enemies, current_enemy_id);
+						current_enemy_id = get_prev_id(enemies, current_enemy_id);
+						current_bullet_id = get_prev_id(bullets, current_enemy_id);
+						//system("pause");
 						list_pop(bullets, bullet_id_for_pop);
 						list_pop(enemies, enemy_id_for_pop);
 						break;
@@ -67,19 +68,19 @@ void fire(list bullets, list enemies) {
 	while (current_enemy_id != -1) {
 		ship* current_enemy = (ship*)get_comp(enemies, current_enemy_id);
 		//add_enemy_bullet(bullets, current_enemy);
-		add_bullet(bullets, current_enemy->x-1, current_enemy->y, -1, rand() % 3 - 1, 1);
-		add_bullet(bullets, current_enemy->x-1, current_enemy->y + current_enemy->size_y-1, -1, rand() % 3 - 1, 1);
+		add_bullet(bullets, current_enemy->x - 1, current_enemy->y, -1, rand() % 3 - 1, 1);
+		add_bullet(bullets, current_enemy->x - 1, current_enemy->y + current_enemy->size_y - 1, -1, rand() % 3 - 1, 1);
 		current_enemy_id = get_next_id(enemies, current_enemy_id);
 	}
 }
 
-int process_key (ship* SHIP){
+int process_key(ship* SHIP, list bullets) {
 	if (GetKeyState(VK_LEFT) & 0x8000) {
-		if(SHIP->x > 1)
+		if (SHIP->x > 1)
 			SHIP->x--;
 	}
 	if (GetKeyState(VK_RIGHT) & 0x8000) {
-		if (SHIP->x + SHIP->size_x < WIDTH-1)
+		if (SHIP->x + SHIP->size_x < WIDTH - 1)
 			SHIP->x++;
 	}
 	if (GetKeyState(VK_UP) & 0x8000) {
@@ -87,16 +88,20 @@ int process_key (ship* SHIP){
 			SHIP->y--;
 	}
 	if (GetKeyState(VK_DOWN) & 0x8000) {
-		if (SHIP->y + SHIP->size_y < HEIGHT-1)
+		if (SHIP->y + SHIP->size_y < HEIGHT - 1)
 			SHIP->y++;
 	}
-	if (GetKeyState(0x5A) & 0x8000) { // Z
-
+	if (GetKeyState(0x51) & 0x8000) { // Z
+		add_bullet(bullets, SHIP->x + SHIP->size_x, SHIP->y, 1, -1, 0);
+		add_bullet(bullets, SHIP->x + SHIP->size_x, SHIP->y + SHIP->size_y - 1, 1, -1, 0);
 	}
-	if (GetKeyState(0x58) & 0x8000) { // X
-
+	if (GetKeyState(0x57) & 0x8000) { // X
+		add_bullet(bullets, SHIP->x + SHIP->size_x, SHIP->y, 1, 0, 0);
+		add_bullet(bullets, SHIP->x + SHIP->size_x, SHIP->y + SHIP->size_y - 1, 1, 0, 0);
 	}
-	if (GetKeyState(0x43) & 0x8000) { // C
-
+	if (GetKeyState(0x45) & 0x8000) { // C
+		add_bullet(bullets, SHIP->x + SHIP->size_x, SHIP->y, 1, 1, 0);
+		add_bullet(bullets, SHIP->x + SHIP->size_x, SHIP->y + SHIP->size_y - 1, 1, 1, 0);
 	}
+	return 0;
 }
