@@ -2,7 +2,7 @@
 #include "physics.h"
 #include <Windows.h>
 #include <WinUser.h>
-int WIDTH = 150;
+int WIDTH = 120;
 int HEIGHT = 30;
 
 void move_enemies(list list, int dir_x, int dir_y) {
@@ -21,13 +21,13 @@ void move_bullets(list bullets, list enemies, ship SHIP) {
 		bullet *current_bullet = (bullet*)get_comp(bullets, current_bullet_id);
 		current_bullet->x += current_bullet->speed_x;
 		current_bullet->y += current_bullet->speed_y;
-		if (current_bullet->x < 0 || current_bullet->x > WIDTH - 1) {
+		if (current_bullet->x < 1 || current_bullet->x > WIDTH - 1) {
 			int id_for_pop = current_bullet_id;
 			current_bullet_id = get_prev_id(bullets, current_bullet_id);
 			list_pop(bullets, id_for_pop);
 		}
 		else {
-			if (current_bullet->y < 0 || current_bullet->y > HEIGHT - 1) {
+			if (current_bullet->y < 1 || current_bullet->y > HEIGHT-2) {
 				current_bullet->speed_y *= -1;
 				current_bullet->y += 2 * current_bullet->speed_y;
 			}
@@ -75,19 +75,19 @@ void fire(list bullets, list enemies) {
 
 int process_key (ship* SHIP){
 	if (GetKeyState(VK_LEFT) & 0x8000) {
-		if(SHIP->x > 0)
+		if(SHIP->x > 1)
 			SHIP->x--;
 	}
 	if (GetKeyState(VK_RIGHT) & 0x8000) {
-		if (SHIP->x + SHIP->size_x < 150)
+		if (SHIP->x + SHIP->size_x < WIDTH-1)
 			SHIP->x++;
 	}
 	if (GetKeyState(VK_UP) & 0x8000) {
-		if (SHIP->y > 0)
+		if (SHIP->y > 1)
 			SHIP->y--;
 	}
 	if (GetKeyState(VK_DOWN) & 0x8000) {
-		if (SHIP->y + SHIP->size_y < 30)
+		if (SHIP->y + SHIP->size_y < HEIGHT-1)
 			SHIP->y++;
 	}
 	if (GetKeyState(0x5A) & 0x8000) { // Z

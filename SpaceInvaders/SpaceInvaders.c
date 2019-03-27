@@ -7,7 +7,7 @@
 #include <time.h>
 #include <sys/timeb.h>
 #define RELOAD_TIME 2500
-#define UPDATE_TIME 600
+#define UPDATE_TIME 0
 
 char current_image[30][150], next_image[30][150];
 
@@ -22,9 +22,10 @@ int main()
 	struct timeb t;
 	ftime(&t);
 	struct timeb last_update = t, last_fire = t, last_bot_fire = t;
-	system("mode con cols=160 lines=35");
+	system("mode con cols=150 lines=40");
 	con_init();
 	con_hideCursor();
+	init_colors();
 	srand(time(NULL));
 	list enemies = (list)malloc(sizeof(list));
 	list bullets = (list)malloc(sizeof(list));
@@ -32,8 +33,8 @@ int main()
 	init_list(enemies);
 	init_list(bullets);
 	add_enemy(enemies, 100, 4, 3, 4, 1);
-	add_enemy(enemies, 100, 13, 3, 4, 1);
-	add_enemy(enemies, 100, 22, 3, 4, 1);
+	/*add_enemy(enemies, 100, 13, 3, 4, 1);
+	add_enemy(enemies, 100, 22, 3, 4, 1);*/
 	fire(bullets, enemies);
 	erase(current_image);
 	erase(next_image);
